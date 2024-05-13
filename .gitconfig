@@ -1,0 +1,8 @@
+[https "https://github.com"]
+    proxy = https://[user]@p-gw.ecb.de:8080
+    sslverify = false
+[http "https://github.com"]
+    proxy = https://[user]@p-gw.ecb.de:8080
+    sslverify = false
+[credential]
+    helper = wincred
