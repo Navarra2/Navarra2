@@ -19,6 +19,7 @@ def main():
     running = True
     spawnBuffer = 10
     numPeople = 200
+    factorPeopleSocialDistancing = 0.75
 
 
     #create people
@@ -26,6 +27,8 @@ def main():
     people = [patientZero]
     for i in range(numPeople-1):
         socialDistancing = False
+        if i < factorPeopleSocialDistancing * numPeople: #percent of population will practise social distancing
+            socialDistancing = True
 
         colliding = True
 
