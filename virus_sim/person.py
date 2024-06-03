@@ -113,9 +113,9 @@ class Person():
         #type 2 collision - one object that is social distancing and one that is not
         elif other.socialDistancing:
 
-            magV = math.sqrt(math.pow(self.vx,2), math.pow(self.vy,2))
+            magV = math.sqrt(math.pow(self.vx,2) + math.pow(self.vy,2))
             tempVector = (self.vx + (self.x - other.x), self.vy + (self.y - other.y))
-            magTempVector = math.sqrt(math.pow(tempVector[0],2), math.pow(tempVector[1],2))
+            magTempVector = math.sqrt(math.pow(tempVector[0],2) +  math.pow(tempVector[1],2))
 
             normTempVector = (tempVector[0]/magTempVector , tempVector[1]/magTempVector)
             self.vx = normTempVector[0]*magV
