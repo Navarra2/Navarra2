@@ -36,6 +36,7 @@ class Person():
             while -minMovement < self.vx < minMovement and -minMovement < self.vy < minMovement: #preventing 0 velocities
                 self.vx = random.uniform(-maxSpeed,maxSpeed)
                 self.vy = random.uniform(-maxSpeed,maxSpeed)
+
     
     #screen - the surface
     def draw(self, screen):
@@ -43,7 +44,7 @@ class Person():
         pygame.draw.circle(screen, pygame.Color(self.colors[self.status]), (int(self.x), int(self.y)), self.radius)
 
     #execute once per frame
-    def update(self):
+    def update(self, screen):
         self.move()
 
         #change from sick to recovered
@@ -52,10 +53,25 @@ class Person():
         
             if self.turnsSick == self.recoveryTime:
                 self.status = "recovered"
-            
-
+        
+        #check for collisions
+        self.checkCollidingWithWall(screen)
 
     def move(self):
         if not self.socialDistancing:
             self.x += self.vx
             self.y += self.vy
+
+
+    #check for collisions with walls and update the velocity
+    def checkCollidingWithWall(self, screen):
+
+        if self.x + self.radius >= screen.get_width() and self.vx > 0: #self.vx > 0 is to prevent it from getting stuck to the wall
+            self.vx *= -1
+        elif self.x - self.radius < 0 and self.vx < 0:
+            self.vx *= -1
+
+        if self.y + self.radius >= screen.get_height() and self.vy > 0: 
+            self.vy *= -1
+        elif self.y - self.radius < 0 and self.vy < 0:
+            self.vy *= -1
